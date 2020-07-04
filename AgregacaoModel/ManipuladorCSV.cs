@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace AgregacaoModel
 {
     public class ManipuladorCSV
     {
+        ILogger logger;
+        
         public List<Zona> CarregarArquivo(String caminhoArquivo)
         {
             List<Zona> Zonas = new List<Zona>();
@@ -129,11 +132,6 @@ namespace AgregacaoModel
             {
                 linha += s.QuantidadeAptos;
             }else if (NivelEscrita > 0 ){
-                if(s.Numero == 95 && s.Zona.Numero == 176)
-                {
-                    linha = linha;
-                }
-
                 if(s.TipoAgregacao == 0)
                 {
                     var Agregadas = s.Agregadas.Where(sa => sa.TipoAgregacao <= NivelEscrita).ToList();
